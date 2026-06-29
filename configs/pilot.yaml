@@ -1,0 +1,21 @@
+seed: 20260626
+output_path: data/pilot/tasks.jsonl
+size: 1200
+task_mix:
+  anti_distractor_retrieval: 400
+  multi_hop_reasoning: 400
+  temporal_update: 400
+target_context_tokens:
+  - 8000
+  - 16000
+difficulty:
+  easy: 0.30
+  medium: 0.50
+  hard: 0.20
+splits:
+  train: 0.70
+  dev: 0.10
+  test: 0.20
+extra_splits:
+  judge_subset_size: 60
+  live_demo_subset_size: 30

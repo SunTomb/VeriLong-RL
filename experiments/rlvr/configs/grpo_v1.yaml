@@ -1,0 +1,42 @@
+base_model: Qwen/Qwen2.5-7B-Instruct
+# v1-gold SFT LoRA adapter (RL 起点). GRPO 继续训练这个 adapter, base 冻结.
+init_adapter: /NAS/yesh/VeriLong-RL/checkpoints/qwen2_5_7b_sft_v1
+output_dir: /NAS/yesh/VeriLong-RL/checkpoints/qwen2_5_7b_sft_v1_grpo
+tasks_path: data/pilot/tasks.jsonl
+family: anti_distractor_retrieval
+split: train
+max_context_tokens: 8000
+seed: 20260628
+
+num_generations: 2
+beta: 0.04
+learning_rate: 0.000001
+max_prompt_length: 14336
+max_completion_length: 256
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 16
+temperature: 0.7
+max_steps: 30
+logging_steps: 1
+save_steps: 25
+bf16: true
+
+# Rollout backend = HF generate (use_vllm: false). vllm could not be used on
+# this cluster: a 46GB A40 cannot co-locate a second 7B copy with the policy,
+# trl 0.14's multi-GPU vllm_device path has a cuda:0/cuda:1 tensor-device bug,
+# and the A100s (Song-3, 80GB) were too contended to hold reliably.
+#
+# MEMORY CONSTRAINT (verified empirically on a 46GB A40): even at the minimum
+# viable settings below (G=2, per_device_batch=2, SDPA attention, gradient
+# checkpointing), the GRPO forward holds ~40GB for a 14K-token sequence — the
+# logits tensor [batch * 14336 * 151936 vocab] alone is several GB and cannot be
+# checkpointed away. This OOMs with no headroom on 46GB. The smallest retrieval
+# train context is 8K-target (~14K real tokens), so the sequence cannot be
+# shortened without truncating scattered gold evidence and invalidating the task.
+# CONCLUSION: the GRPO *pipeline* is validated end-to-end (smoke run completed on
+# Tang-3: model+adapter load, dataset, reward callback, GRPOTrainer, 2 steps,
+# adapter saved), but a full 14K-token training run needs an 80GB card. Re-enable
+# use_vllm and raise G / batch only on a reliably free A100.
+use_vllm: false
+vllm_device: cuda:0
+vllm_gpu_memory_utilization: 0.3

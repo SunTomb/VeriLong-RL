@@ -1,0 +1,17 @@
+{
+  "answer_exact_match_mean": 1.0,
+  "answer_normalized_match_mean": 1.0,
+  "format_valid_mean": 1.0,
+  "step_count_valid_mean": 1.0,
+  "citation_precision_mean": 1.0,
+  "citation_recall_mean": 1.0,
+  "citation_f1_mean": 1.0,
+  "all_gold_evidence_recall_mean": 1.0,
+  "distractor_citation_rate_mean": 0.0,
+  "stale_citation_rate_mean": 0.0,
+  "invalid_citation_rate_mean": 0.0,
+  "overcitation_rate_mean": 0.0,
+  "reward_total_mean": 0.95,
+  "count": 1200,
+  "baseline": "oracle_format_baseline"
+}

@@ -1,0 +1,34 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Logs / temp
+*.log
+*.tmp
+.cache/
+.claude/
+/VeriLong-RL/
+prior_tail_extract.txt
+*-副本*
+
+# Generated training/distillation datasets
+data/sft/*.jsonl
+
+# Raw API responses + cache (runtime artifacts, may incur cost / contain raw responses)
+results/raw/
+
+# Presentation generated caches
+~$*

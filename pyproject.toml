@@ -1,0 +1,14 @@
+[project]
+name = "verilong-rl"
+version = "0.1.0"
+description = "Phase 1 pilot schemas for the VeriLong-RL benchmark."
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2",
+    "pytest>=8",
+    "pyyaml>=6",
+    "typer>=0.12",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

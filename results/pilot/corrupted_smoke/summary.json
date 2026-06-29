@@ -1,0 +1,17 @@
+{
+  "answer_exact_match_mean": 1.0,
+  "answer_normalized_match_mean": 1.0,
+  "format_valid_mean": 1.0,
+  "step_count_valid_mean": 1.0,
+  "citation_precision_mean": 0.3055555555555555,
+  "citation_recall_mean": 0.3055555555555555,
+  "citation_f1_mean": 0.3055555555555555,
+  "all_gold_evidence_recall_mean": 0.0,
+  "distractor_citation_rate_mean": 0.6944444444444445,
+  "stale_citation_rate_mean": 0.0,
+  "invalid_citation_rate_mean": 0.0,
+  "overcitation_rate_mean": 0.6944444444444445,
+  "reward_total_mean": 0.6722222222222223,
+  "count": 1200,
+  "baseline": "corrupted_distractor_baseline"
+}

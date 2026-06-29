@@ -1,0 +1,33 @@
+seed: 20260627
+output_path: data/pilot/hard_tasks.jsonl
+size: 180
+task_mix:
+  anti_distractor_retrieval: 60
+  multi_hop_reasoning: 60
+  temporal_update: 60
+target_context_tokens:
+  - 16000
+  - 32000
+difficulty:
+  hard: 1.0
+splits:
+  train: 0.70
+  dev: 0.10
+  test: 0.20
+extra_splits:
+  judge_subset_size: 30
+  live_demo_subset_size: 15
+generation:
+  hard:
+    anti_distractor_retrieval:
+      distractor_count: 12
+      distractor_strength: adversarial
+      evidence_position: random
+    multi_hop_reasoning:
+      hop_count: 5
+      irrelevant_rule_count: 8
+      conflicting_rule_count: 2
+    temporal_update:
+      update_count: 4
+      stale_count: 8
+      evidence_position: mixed

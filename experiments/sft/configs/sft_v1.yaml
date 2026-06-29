@@ -1,0 +1,33 @@
+base_model: Qwen/Qwen2.5-7B-Instruct
+train_path: data/sft/train.jsonl
+output_dir: /NAS/yesh/VeriLong-RL/checkpoints/qwen2_5_7b_sft_v1
+seed: 20260627
+# Real Qwen2.5 token counts are ~1.75x the whitespace-word padding target, so
+# 8K-context tasks are ~14K tokens and 16K-context tasks ~28K. 16384 captures
+# all 420 8K-context train examples and drops the 420 16K ones (uneconomical on
+# a single A40). Raise this only with multi-GPU / sequence parallelism.
+max_seq_len: 16384
+num_train_epochs: 3
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 16
+learning_rate: 0.0002
+warmup_ratio: 0.03
+# adafactor keeps optimizer state tiny (no per-parameter moments like AdamW),
+# giving headroom for 14K-token sequences on a single 48GB A40. LoRA's trainable
+# set is small so the optimizer choice barely affects quality here.
+optim: adafactor
+logging_steps: 5
+save_strategy: epoch
+gradient_checkpointing: true
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
