@@ -1,0 +1,3 @@
+- [Long Context Experiment Scope](long-context-experiment-scope.md) — 本项目先完成合成多文档证据任务主线，再按时间决定是否扩展真实论文/代码仓库任务。
+- [Cluster Resources](cluster-resources.md) — Tang/Song GPU 集群、NAS 路径与已缓存模型资源，用于训练与评测计划。
+- [Project Decisions](project-decisions.md) — VeriLong-RL 已确认的 benchmark、数据、训练、评测与 demo 设计决策。

@@ -1,0 +1,48 @@
+# Prior Session Tail Extract
+
+Source session: `382b2af7-64ab-42e1-b374-e44bd8f47bc5`
+Current project target: `D:\USTC\2026Summer\面试\VeriLong-RL`
+Extracted on: 2026-06-26
+
+## Last relevant user instruction
+
+The user asked to continue the unfinished task from conversation `382b2af7-64ab-42e1-b374-e44bd8f47bc5`:
+
+- finish “创建设计文档目录并写入完整设计”;
+- migrate files and memory into `D:\USTC\2026Summer\面试\VeriLong-RL`;
+- after everything is done, write a prompt for a new conversation so a new Agent can resume quickly.
+
+The earlier context also included repeated “请你继续完成未完成的任务” after the session stalled.
+
+## Work already completed before this handoff
+
+The prior/continued work established these directories and files:
+
+- `D:\USTC\2026Summer\面试\VeriLong-RL\docs\superpowers\specs\`
+- `D:\USTC\2026Summer\面试\VeriLong-RL\memory\`
+- `D:\USTC\2026Summer\面试\VeriLong-RL\docs\handoff\`
+- `D:\USTC\2026Summer\面试\VeriLong-RL\docs\superpowers\specs\2026-06-26-verilong-rl-design.md`
+
+The design document’s high-level status:
+
+- Project: **VeriLong-RL**
+- Positioning: **A verifiable long-context benchmark for evidence-grounded reasoning and RLVR**
+- Chosen approach: **方案 B：Benchmark + Interactive Demo 双核心**
+- Phase priority: Phase 1 synthetic multi-document evidence benchmark is mandatory; real-paper and repo-level tasks are optional later phases.
+- The design doc status line says: “已完成设计稿，待实施计划拆解”.
+- The design doc explicitly says only docs/memory should be created now; full engineering scaffolding should wait until an implementation plan is confirmed.
+
+## Work that still needed completion at transcript end
+
+The prior transcript ended before completing:
+
+- local project memory files under `VeriLong-RL\memory\`;
+- `docs\handoff\new-agent-prompt.md`;
+- `docs\handoff\prior-session-tail-extract.txt`;
+- a final user-visible prompt for starting a new conversation.
+
+This continued session completes those migration/handoff files.
+
+## Important caveat
+
+The previous assistant scanned the design doc for placeholders. Hits included example `...` snippets and results-table `value` placeholders. These are intentional: the doc says experimental result values must be filled after experiments and should not be fabricated during design.
