@@ -102,34 +102,30 @@ function jsonResponse(body: unknown) {
   return new Response(JSON.stringify(body), { status: 200, headers: { 'Content-Type': 'application/json' } });
 }
 
-afterEach(() => {
-  vi.restoreAllMocks();
-});
+afterEach(() => { vi.restoreAllMocks(); });
 
 describe('App', () => {
-  it('renders homepage status and smoke labels', async () => {
+  it('renders Chinese homepage with project name and smoke label', async () => {
     mockFetch();
-
     render(<App />);
 
     expect(await screen.findByRole('heading', { name: 'VeriLong-RL' })).toBeInTheDocument();
-    expect(screen.getByText(/Phase 1 pilot:/)).toBeInTheDocument();
-    expect(screen.getByText(/Smoke baselines, not a leaderboard/)).toBeInTheDocument();
-    expect(screen.getByText(/Anti-distractor retrieval/)).toBeInTheDocument();
+    expect(screen.getByText(/项目当前进度/)).toBeInTheDocument();
+    expect(screen.getByText(/冒烟测试基线（非模型排行榜）/)).toBeInTheDocument();
+    expect(screen.getByText(/抗干扰证据检索/)).toBeInTheDocument();
   });
 
-  it('runs the dry-run demo flow', async () => {
+  it('runs the Chinese dry-run demo flow', async () => {
     mockFetch();
     const user = userEvent.setup();
-
     render(<App />);
 
-    await user.click(await screen.findByRole('button', { name: 'Demo' }));
+    await user.click(await screen.findByRole('button', { name: '交互式演示' }));
     expect(await screen.findByText(/Which access code is assigned to Project Nova/)).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: /Run dry-run scorer/ }));
+    await user.click(screen.getByRole('button', { name: /运行离线评分器/ }));
 
-    expect(await screen.findByRole('heading', { name: 'Dry-run oracle stub' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /离线评分器输出/ })).toBeInTheDocument();
     expect(screen.getAllByText('0.950').length).toBeGreaterThan(0);
   });
 });

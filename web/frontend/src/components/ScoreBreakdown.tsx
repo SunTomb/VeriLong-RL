@@ -4,26 +4,20 @@ interface Props {
 }
 
 const METRIC_KEYS = [
-  ['reward_total', 'Reward'],
-  ['answer_normalized_match', 'Answer'],
-  ['citation_f1', 'Citation F1'],
-  ['format_valid', 'Format'],
-  ['step_count_valid', 'Steps'],
-  ['distractor_citation_rate', 'Distractor rate'],
-  ['stale_citation_rate', 'Stale rate'],
-  ['overcitation_rate', 'Over-citation'],
+  ['reward_total', '综合得分 (Reward)'],
+  ['answer_normalized_match', '答案规范匹配'],
+  ['citation_f1', '引用 F1 值'],
+  ['format_valid', '格式规约率'],
+  ['step_count_valid', '推理步数有效性'],
+  ['distractor_citation_rate', '干扰项误引率'],
+  ['stale_citation_rate', '过期记录误引率'],
+  ['overcitation_rate', '冗余过度引用率'],
 ];
 
 function formatMetric(value: unknown): string {
-  if (typeof value === 'number') {
-    return value.toFixed(3);
-  }
-  if (typeof value === 'boolean') {
-    return value ? 'yes' : 'no';
-  }
-  if (value == null) {
-    return '—';
-  }
+  if (typeof value === 'number') return value.toFixed(3);
+  if (typeof value === 'boolean') return value ? '是' : '否';
+  if (value == null) return '—';
   return String(value);
 }
 
@@ -32,10 +26,12 @@ export function ScoreBreakdown({ metrics, errorType }: Props) {
     <section className="panel" aria-labelledby="score-heading">
       <div className="panel-header">
         <div>
-          <p className="eyebrow">Programmatic reward</p>
-          <h2 id="score-heading">Score breakdown</h2>
+          <p className="eyebrow">程序化评测奖励</p>
+          <h2 id="score-heading">奖励信号得分细则</h2>
         </div>
-        <span className={errorType ? 'pill warning' : 'pill success'}>{errorType ?? 'no error'}</span>
+        <span className={errorType ? 'pill warning' : 'pill success'}>
+          {errorType ?? '评估正常解析'}
+        </span>
       </div>
       <dl className="metric-list wide">
         {METRIC_KEYS.map(([key, label]) => (
@@ -47,7 +43,7 @@ export function ScoreBreakdown({ metrics, errorType }: Props) {
       </dl>
       {typeof metrics.reward_components === 'object' && metrics.reward_components ? (
         <details className="prompt-preview">
-          <summary>Reward components</summary>
+          <summary>奖励组件原始权重与得分明细 (Components)</summary>
           <pre>{JSON.stringify(metrics.reward_components, null, 2)}</pre>
         </details>
       ) : null}
