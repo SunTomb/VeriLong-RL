@@ -14,6 +14,14 @@ venv/
 node_modules/
 dist/
 build/
+web/frontend/node_modules/
+web/frontend/dist/
+web/frontend/coverage/
+
+# Environment files
+.env
+.env.*
+!.env.example
 
 # Logs / temp
 *.log
